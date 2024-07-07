@@ -1,32 +1,17 @@
 # InceptionResNet-SSVEP-BCI
 
-This repository contains the code and resources for the paper "InceptionResNet for SSVEP-based BCI".
-
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Dataset](#dataset)
-- [Model](#model)
-- [Training](#training)
-- [Evaluation](#evaluation)
-- [Results](#results)
-- [Contributors](#contributors)
+- [Contributing](#contributing)
 - [License](#license)
+- [Contact](#contact)
 
 ## Introduction
 
-This project presents an InceptionResNet-based model for SSVEP-based BCI applications. The proposed model achieves state-of-the-art performance on several benchmark datasets.
-
-## Requirements
-
-- Python 3.6+
-- PyTorch 1.7+
-- NumPy
-- SciPy
-- Scikit-learn
+This repository contains the implementation of InceptionResNet for Steady-State Visual Evoked Potential (SSVEP) based Brain-Computer Interface (BCI). The proposed model achieves state-of-the-art performance on several benchmark datasets.
 
 ## Installation
 
@@ -42,3 +27,26 @@ This project presents an InceptionResNet-based model for SSVEP-based BCI applica
     ```bash
     pip install -r requirements.txt
     ```
+## Usage
+To run the project, use the following command:
+```python
+python main.py
+```
+
+## Contributing
+
+Contributions are welcome! Please follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Create a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or inquiries, please contact m11207330@mail.ntust.edu.tw
