@@ -1,7 +1,6 @@
 import copy
 import time
 import torch
-from torchsummary import summary 
 import numpy as np
 from sklearn.metrics import accuracy_score
 from torchsignal.datasets.hsssvep import HSSSVEP
@@ -52,42 +51,6 @@ config = {
   "multitask": True,
   "runkfold": 5,
 }
-
-device = torch.device("cuda:"+str(config['gpu']) if torch.cuda.is_available() else "cpu")
-print('device', device)
-
-subject_ids = list(np.arange(config['train_subject_ids']['low'], config['train_subject_ids']['high']+1, dtype=int))
-
-data = MultipleSubjects(
-    dataset=HSSSVEP, 
-    root=config['root'], 
-    subject_ids=subject_ids, 
-    selected_channels=config['selected_channels'],
-    segment_config=config['segment_config'],
-    bandpass_config=config['bandpass_config'],
-    one_hot_labels=True,
-)
-
-print("Input data shape:", data.data_by_subjects[1].data.shape)
-print("Target shape:", data.data_by_subjects[1].targets.shape)
-
-
-model = Model(num_channel=config['num_channel'],
-    num_classes=config['num_classes'],
-    signal_length=config['segment_config']['window_len'] * config['bandpass_config']['sample_rate'],
-    filters_n1=config['model']['n1'],
-    kernel_window_ssvep=config['model']['kernel_window_ssvep'],
-    kernel_window=config['model']['kernel_window'],
-    conv_3_dilation=config['model']['conv_3_dilation'],
-).to(device)
-
-summary(model, (data.data_by_subjects[1].data.shape[1], data.data_by_subjects[1].data.shape[2]))
-
-def count_params(model):
-    return sum(p.numel() for p in model.parameters() if p.requires_grad)
-print('Model size:', count_params(model))
-
-del model
 
 def train(model, data_loader, topk_accuracy):
     model.train()
@@ -201,6 +164,24 @@ def fit(model, dataloaders_dict, num_epochs=10, early_stopping=5, topk_accuracy=
 
         else:
             scheduler.step()
+
+device = torch.device("cuda:"+str(config['gpu']) if torch.cuda.is_available() else "cpu")
+print('device', device)
+
+subject_ids = list(np.arange(config['train_subject_ids']['low'], config['train_subject_ids']['high']+1, dtype=int))
+
+data = MultipleSubjects(
+    dataset=HSSSVEP, 
+    root=config['root'], 
+    subject_ids=subject_ids, 
+    selected_channels=config['selected_channels'],
+    segment_config=config['segment_config'],
+    bandpass_config=config['bandpass_config'],
+    one_hot_labels=True,
+)
+
+print("Input data shape:", data.data_by_subjects[1].data.shape)
+print("Target shape:", data.data_by_subjects[1].targets.shape)
 
 acc = []
 test_subject_ids = list(np.arange(config['test_subject_ids']['low'], config['test_subject_ids']['high']+1, dtype=int))
