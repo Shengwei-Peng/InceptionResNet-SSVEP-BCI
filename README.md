@@ -12,6 +12,7 @@
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
 ## Introduction
 
@@ -21,7 +22,7 @@ This repository contains the implementation of InceptionResNet for Steady-State 
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/Shengwei0516/InceptionResNet-SSVEP-BCI.git
+    git clone https://github.com/Shengwei-Peng/InceptionResNet-SSVEP-BCI.git
     ```
 2. Navigate to the project directory:
     ```bash
@@ -65,3 +66,9 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Contact
 
 For any questions or inquiries, please contact m11207330@mail.ntust.edu.tw
+
+## Acknowledgements
+
+We would like to express our gratitude to the following repositories for their contributions and inspiration:
+
+- [torchsignal](https://github.com/jinglescode/torchsignal): A signal processing library for PyTorch. This library provided essential functions and algorithms that greatly aided in the development of our signal processing module.
